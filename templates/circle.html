@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}Circle Accuracy | MathLab{% endblock %}
+
+{% block content %}
+<section class="tool-header">
+    <p class="eyebrow">Measurement experiment</p>
+    <h1>Circle Accuracy Calculator</h1>
+    <p>
+        For a mathematically perfect circle, circumference divided by diameter
+        equals π. Enter measurements in the same units to compare their ratio with π.
+    </p>
+</section>
+
+<section class="tool-panel">
+    <form method="post" action="{{ url_for('circle') }}" class="math-form two-column-form">
+        <div class="form-group">
+            <label for="circumference">Circumference</label>
+            <input
+                id="circumference"
+                name="circumference"
+                type="number"
+                min="0"
+                step="any"
+                value="{{ circumference|default('', true) }}"
+                placeholder="For example, 31.2"
+                required
+            >
+        </div>
+        <div class="form-group">
+            <label for="diameter">Diameter</label>
+            <input
+                id="diameter"
+                name="diameter"
+                type="number"
+                min="0"
+                step="any"
+                value="{{ diameter|default('', true) }}"
+                placeholder="For example, 10"
+                required
+            >
+        </div>
+        <button class="button form-button" type="submit">Compare with π</button>
+    </form>
+</section>
+
+{% if result %}
+<section class="results-panel" aria-live="polite">
+    <div class="result-heading">
+        <div>
+            <p class="eyebrow">Measurement result</p>
+            <h2>{{ result.rating }}</h2>
+        </div>
+        <span class="pi-symbol" aria-hidden="true">π</span>
+    </div>
+
+    <div class="ratio-comparison">
+        <div>
+            <span>Measured C ÷ d</span>
+            <strong>{{ "%.8f"|format(result.measured_ratio) }}</strong>
+        </div>
+        <div class="comparison-mark" aria-hidden="true">↔</div>
+        <div>
+            <span>π</span>
+            <strong>{{ "%.8f"|format(result.pi_value) }}</strong>
+        </div>
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <span class="stat-label">Percent error</span>
+            <strong>{{ "%.4f"|format(result.percent_error) }}%</strong>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Ratio difference</span>
+            <strong>{{ "%.8f"|format(result.difference) }}</strong>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Expected circumference</span>
+            <strong>{{ "%.6f"|format(result.expected_circumference) }}</strong>
+        </div>
+    </div>
+
+    <div class="formula-card">
+        <h3>How this was calculated</h3>
+        <p>
+            {{ result.circumference }} ÷ {{ result.diameter }} =
+            {{ "%.8f"|format(result.measured_ratio) }}
+        </p>
+        <p>
+            Percent error = |measured ratio − π| ÷ π × 100 =
+            {{ "%.4f"|format(result.percent_error) }}%
+        </p>
+        <small>
+            This compares the two measurements with the circle equation; it does
+            not independently prove that the measured object is a perfect circle.
+        </small>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
