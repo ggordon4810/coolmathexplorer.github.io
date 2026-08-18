@@ -1,1 +1,90 @@
+{% extends "layout.html" %}
 
+{% block title %}Collatz Explorer | MathLab{% endblock %}
+
+{% block content %}
+<section class="tool-header">
+    <p class="eyebrow">Number sequence</p>
+    <h1>Collatz Explorer</h1>
+    <p>
+        If a number is even, divide it by 2. If it is odd, multiply it by 3
+        and add 1. The conjecture predicts that every positive integer will
+        eventually reach the 4 → 2 → 1 cycle.
+    </p>
+</section>
+
+<section class="tool-panel">
+    <form method="post" action="{{ url_for('collatz') }}" class="math-form">
+        <div class="form-group">
+            <label for="starting-number">Starting number</label>
+            <input
+                id="starting-number"
+                name="starting_number"
+                type="number"
+                min="1"
+                step="1"
+                value="{{ starting_number|default('', true) }}"
+                placeholder="For example, 27"
+                required
+            >
+        </div>
+        <button class="button" type="submit">Generate sequence</button>
+    </form>
+</section>
+
+{% if result %}
+<section class="results-panel" aria-live="polite">
+    <div class="result-heading">
+        <div>
+            <p class="eyebrow">Results for {{ result.starting_number }}</p>
+            <h2>
+                {% if result.reached_one %}
+                    Reached 1 in {{ result.steps }} steps
+                {% else %}
+                    Stopped after {{ result.max_steps }} steps
+                {% endif %}
+            </h2>
+        </div>
+        <span class="status-badge {{ 'status-success' if result.reached_one else 'status-warning' }}">
+            {{ 'Reached 1' if result.reached_one else 'Step limit reached' }}
+        </span>
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <span class="stat-label">Steps</span>
+            <strong>{{ result.steps }}</strong>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Highest value</span>
+            <strong>{{ "{:,}".format(result.highest_value) }}</strong>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Values shown</span>
+            <strong>{{ result.sequence|length }}</strong>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>Value by step</h3>
+        <canvas
+            id="collatz-chart"
+            data-sequence='{{ result.sequence|tojson }}'
+            aria-label="Line graph of the Collatz sequence"
+        ></canvas>
+    </div>
+
+    <div class="sequence-card">
+        <h3>Complete sequence</h3>
+        <ol class="sequence-list">
+            {% for value in result.sequence %}
+                <li class="{{ 'even-number' if value % 2 == 0 else 'odd-number' }}">
+                    <span class="sequence-step">Step {{ loop.index0 }}</span>
+                    <strong>{{ "{:,}".format(value) }}</strong>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
