@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}Triangular Number Tester | MathLab{% endblock %}
+
+{% block content %}
+<section class="tool-header">
+    <p class="eyebrow">Figurate numbers</p>
+    <h1>Triangular Number Tester</h1>
+    <p>
+        A triangular number can be arranged as an equilateral triangle of dots.
+        Enter a positive integer to test it using the perfect-square rule.
+    </p>
+</section>
+
+<section class="tool-panel">
+    <form method="post" action="{{ url_for('triangular') }}" class="math-form">
+        <div class="form-group">
+            <label for="number">Number to test</label>
+            <input
+                id="number"
+                name="number"
+                type="number"
+                min="1"
+                step="1"
+                value="{{ number|default('', true) }}"
+                placeholder="For example, 15"
+                required
+            >
+        </div>
+        <button class="button" type="submit">Test the number</button>
+    </form>
+</section>
+
+{% if result %}
+<section class="results-panel triangular-result" aria-live="polite">
+    <div class="result-heading">
+        <div>
+            <p class="eyebrow">Result for {{ result.number }}</p>
+            <h2>
+                {% if result.is_triangular %}
+                    Yes—{{ result.number }} is triangular
+                {% else %}
+                    No—{{ result.number }} is not triangular
+                {% endif %}
+            </h2>
+        </div>
+        <span class="status-badge {{ 'status-success' if result.is_triangular else 'status-neutral' }}">
+            {{ 'Triangular' if result.is_triangular else 'Not triangular' }}
+        </span>
+    </div>
+
+    {% if result.is_triangular %}
+        <div class="triangle-visual" data-position="{{ result.position }}" aria-hidden="true"></div>
+        <div class="formula-card proof-card">
+            <h3>Proof</h3>
+            <p class="large-formula">8({{ result.number }}) + 1 = {{ result.test_value }} = {{ result.root }}²</p>
+            <p class="large-formula">
+                {{ result.number }} = {{ result.position }}({{ result.position }} + 1) ÷ 2
+            </p>
+            <p>{{ result.explanation }}</p>
+        </div>
+        <div class="stat-card position-card">
+            <span class="stat-label">Position in the sequence</span>
+            <strong>T<sub>{{ result.position }}</sub></strong>
+        </div>
+    {% else %}
+        <div class="formula-card proof-card">
+            <h3>Why not?</h3>
+            <p class="large-formula">8({{ result.number }}) + 1 = {{ result.test_value }}</p>
+            <p>
+                The integer square root is {{ result.root }}, but
+                {{ result.root }}² = {{ result.root ** 2 }}, not {{ result.test_value }}.
+            </p>
+            <p>{{ result.explanation }}</p>
+        </div>
+    {% endif %}
+</section>
+{% endif %}
+
+<aside class="learn-card">
+    <h2>The perfect-square test</h2>
+    <p>A positive integer <em>N</em> is triangular exactly when 8<em>N</em> + 1 is a perfect square.</p>
+</aside>
+{% endblock %}
