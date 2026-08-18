@@ -18,7 +18,7 @@
 
 ![Dashboard](images/Dashboard.jpg)
 
-## Collatz Conjecture
+## Collatz Explorer
 
 ![Collatz Conjecture](images/Collatz1.jpg)
 ![Collatz Conjecture](images/Collatz2.jpg)
