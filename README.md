@@ -28,7 +28,7 @@
 ![Circle Calculator](images/Circle1.jpg)
 ![Circle Calculator](images/Circle2.jpg)
 
-## Triangular Numbers
+## Triangular Number Tester
 
 ![Triangular Numbers](images/Triangle1.jpg)
 ![Triangular Numbers](images/Triangle2.jpg)
