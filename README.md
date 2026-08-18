@@ -18,22 +18,22 @@
 
 ![Dashboard](images/Dashboard.jpg)
 
-## Project Description
+## Collatz Conjecture
 
-![Experiment Log](images/Description.jpg)
+![Collatz Conjecture](images/Collatz1.jpg)
+![Collatz Conjecture](images/Collatz2.jpg)
 
-## Data Upload
+## Circle Comparison
 
-![New Experiments](images/DataUpload.jpg)
+![Circle Calculator](images/Circle1.jpg)
+![Circle Calculator](images/Circle2.jpg)
 
-## Manual Entry
+## Triangular Numbers
 
-![Relaxivity](images/ManualEntry.jpg)
+![Triangular Numbers](images/Triangle1.jpg)
+![Triangular Numbers](images/Triangle2.jpg)
 
-## Graph Settings
 
-![Graph Settings](images/GraphingOptions.jpg)
-![Graph Settings](images/GraphingOptions2.jpg)
 
 
 ## Running MathLab Locally
