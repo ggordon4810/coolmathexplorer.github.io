@@ -691,6 +691,25 @@ h3 {
         min-height: 300px;
     }
 }
+/* Keep every page centered consistently. */
+main > .container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Give the responsive chart a controlled height. */
+.chart-card {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.chart-card canvas {
+    display: block;
+    width: 100% !important;
+    height: 400px !important;
+}
 
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -700,4 +719,5 @@ h3 {
         transition: none !important;
     }
 }
+
 
