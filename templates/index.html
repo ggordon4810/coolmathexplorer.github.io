@@ -1,1 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}MathLab | Interactive Mathematics{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Interactive mathematics</p>
+    <h1>Explore patterns hidden inside numbers.</h1>
+    <p class="hero-text">
+        Test famous sequences, compare real measurements with π, and discover
+        whether a number can form a perfect triangular arrangement.
+    </p>
+</section>
+
+<section class="experiment-grid" aria-label="Math experiments">
+    <article class="experiment-card card-collatz">
+        <div class="card-symbol" aria-hidden="true">4 → 2 → 1</div>
+        <h2>Collatz Explorer</h2>
+        <p>Choose a positive integer and follow its Collatz sequence for up to 100 steps.</p>
+        <a class="button" href="{{ url_for('collatz') }}">Explore the sequence</a>
+    </article>
+
+    <article class="experiment-card card-circle">
+        <div class="card-symbol" aria-hidden="true">C ÷ d ≈ π</div>
+        <h2>Circle Accuracy</h2>
+        <p>Compare measured circumference and diameter with the ideal ratio π.</p>
+        <a class="button" href="{{ url_for('circle') }}">Compare measurements</a>
+    </article>
+
+    <article class="experiment-card card-triangular">
+        <div class="card-symbol" aria-hidden="true">1 + 2 + 3 + …</div>
+        <h2>Triangular Numbers</h2>
+        <p>Test a number and reveal the equation that proves whether it is triangular.</p>
+        <a class="button" href="{{ url_for('triangular') }}">Test a number</a>
+    </article>
+</section>
+{% endblock %}
 
