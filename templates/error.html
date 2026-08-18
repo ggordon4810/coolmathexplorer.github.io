@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Something Went Wrong | MathLab{% endblock %}
+
+{% block content %}
+<section class="error-panel">
+    <p class="error-code">{{ code|default('Error', true) }}</p>
+    <h1>{{ title|default('Something went wrong', true) }}</h1>
+    <p>{{ message|default('The request could not be completed. Please check your input and try again.', true) }}</p>
+    <a class="button" href="{{ url_for('index') }}">Return home</a>
+</section>
+{% endblock %}
