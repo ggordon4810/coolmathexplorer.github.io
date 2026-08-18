@@ -23,7 +23,7 @@
 ![Collatz Conjecture](images/Collatz1.jpg)
 ![Collatz Conjecture](images/Collatz2.jpg)
 
-## Circle Comparison
+## Circle Accuracy Calculator
 
 ![Circle Calculator](images/Circle1.jpg)
 ![Circle Calculator](images/Circle2.jpg)
